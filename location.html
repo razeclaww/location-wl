@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>WL Food Delivery — Share Your Delivery Location</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/location.css" />
+</head>
+<body>
+
+  <div class="container">
+    <div class="brand-header">
+      <img src="favicon.png" alt="WL Food Delivery" class="brand-logo" />
+      <div class="brand-title">WL Food Delivery</div>
+      <div class="brand-sub">Precise Delivery Location Confirmation</div>
+    </div>
+
+    <div class="card">
+      <div class="rider-card">
+        <div id="riderAvatar" class="rider-avatar">R</div>
+        <div class="rider-info">
+          <div class="rider-label">Assigned Rider</div>
+          <div id="riderNameDisplay" class="rider-name">Loading...</div>
+          <div id="orderBadgeDisplay" class="order-badge hidden"></div>
+        </div>
+      </div>
+
+      <div class="section-title">Share Your Precise Location</div>
+      <p class="section-desc">
+        Allow location access so our rider receives your exact delivery address and can reach you smoothly without calling for directions.
+      </p>
+
+      <div id="generalError" class="status-box status-error hidden"></div>
+
+      <button id="locateBtn" class="btn btn-locate" onclick="requestLocation()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="3"></circle>
+          <line x1="12" y1="2" x2="12" y2="5"></line>
+          <line x1="12" y1="19" x2="12" y2="22"></line>
+          <line x1="2" y1="12" x2="5" y2="12"></line>
+          <line x1="19" y1="12" x2="22" y2="12"></line>
+        </svg>
+        Detect My Current Location
+      </button>
+
+      <div id="statusLoading" class="status-box status-loading hidden">
+        <div class="spinner"></div>
+        <span>Acquiring high-accuracy GPS coordinates...</span>
+      </div>
+
+      <div id="statusError" class="status-box status-error hidden"></div>
+
+      <div id="locationConfirmed" class="location-confirmed hidden">
+        <div class="loc-badge">
+          <span>✓</span> Location Detected
+        </div>
+
+        <div class="coords-row">
+          <span>Latitude:</span>
+          <span id="latDisplay" class="coords-value">0.000000</span>
+        </div>
+        <div class="coords-row">
+          <span>Longitude:</span>
+          <span id="lngDisplay" class="coords-value">0.000000</span>
+        </div>
+        <div id="accuracyDisplay" class="accuracy-text">Accuracy: within ±0 meters</div>
+
+        <div class="map-preview">
+          <iframe id="mapIframe" title="Location Map"></iframe>
+        </div>
+
+        <div class="field">
+          <label for="landmarkInput">Apartment, Floor, or Landmark (Optional)</label>
+          <input type="text" id="landmarkInput" placeholder="e.g. House #12, 2nd floor, opposite Shiva temple" />
+        </div>
+
+        <button class="btn btn-whatsapp" onclick="sendLocationToWhatsApp()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.838.835 2.809.835h.002c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.788-5.766zm9.969 5.828c0 5.523-4.477 10-10 10-1.745 0-3.382-.449-4.81-1.233l-5.19 1.359 1.385-5.056c-.886-1.488-1.385-3.228-1.385-5.07 0-5.523 4.477-10 10-10s10 4.477 10 10z"/>
+          </svg>
+          Send Location to Rider on WhatsApp
+        </button>
+
+        <a id="viewMapsBtn" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+          Preview in Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <div>Made by <a href="https://razeclaw.vercel.app" target="_blank" rel="noopener noreferrer" class="creator-link">razeclaw</a></div>
+    <div class="footer-sub">&copy; WL Food Delivery &bull; Fast &amp; Reliable Delivery</div>
+  </footer>
+
+  <script src="js/location.js"></script>
+</body>
+</html>

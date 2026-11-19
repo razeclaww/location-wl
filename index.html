@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>WL Food Delivery — CSR Dispatch</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="top-header">
+    <div class="brand-row">
+      <img src="favicon.png" alt="WL Food Delivery" class="brand-icon" />
+      <div>
+        <div class="brand-title">WL Food Delivery</div>
+        <div class="brand-sub">CSR Dispatch &amp; Location Link Portal</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-layout">
+    <div id="pinCard" class="card pin-card">
+      <div class="badge">CSR Access Only</div>
+      <h2>Enter Staff PIN</h2>
+      <p class="desc">Enter your staff PIN to unlock the dispatch portal.</p>
+      <div class="field">
+        <input
+          type="password"
+          id="pinInput"
+          maxlength="6"
+          inputmode="numeric"
+          placeholder="••••"
+          onkeyup="if(event.key==='Enter') verifyPin()"
+          autocomplete="current-password"
+        />
+      </div>
+      <div id="pinError" class="alert alert-error hidden">Incorrect PIN. Please try again.</div>
+      <button class="btn btn-primary" onclick="verifyPin()">Unlock Portal</button>
+    </div>
+
+    <div id="portalContainer" class="portal-grid hidden">
+      <aside class="sidebar-card">
+        <div class="sidebar-header">
+          <div class="sidebar-title">
+            <span>Dispatch History</span>
+            <span id="historyCount" class="count-badge">0</span>
+          </div>
+          <button class="btn-clear" onclick="clearHistory()" title="Clear History">Clear</button>
+        </div>
+        <div id="historyList" class="history-list">
+          <div class="empty-history">No dispatches yet. Generated links will appear here.</div>
+        </div>
+      </aside>
+
+      <section class="card main-form-card">
+        <div class="badge badge-live">
+          <span class="badge-dot"></span> CSR Dispatch Desk
+        </div>
+        <h2>Assign Rider</h2>
+        <p class="desc">Select or input rider details to generate a customer tracking link.</p>
+
+        <div id="savedRidersWrap" class="hidden">
+          <label>Recent Riders</label>
+          <div id="riderPills" class="rider-pills"></div>
+        </div>
+
+        <div class="field">
+          <label for="riderNameInput">Rider Name</label>
+          <input type="text" id="riderNameInput" placeholder="e.g. Ramesh Thapa" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="riderPhoneInput">Rider Contact</label>
+          <div class="phone-wrapper">
+            <input type="tel" id="riderPhoneInput" value="+977" autocomplete="tel" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="orderDetailsInput">DETAILS</label>
+          <input type="text" id="orderDetailsInput" placeholder="Order items, customer name, notes..." autocomplete="off" />
+        </div>
+
+        <div id="formError" class="alert alert-error hidden"></div>
+
+        <button class="btn btn-primary" onclick="makeLink()">
+          Generate Customer Link
+        </button>
+      </section>
+
+      <section id="resultPanel" class="card result-panel hidden">
+        <div class="badge">Generated Link</div>
+        <h2>Link Ready</h2>
+        <p class="desc">Send this link to the customer on WhatsApp, Messenger, or SMS.</p>
+
+        <div class="result-details">
+          <div class="res-row">
+            <span class="res-label">Assigned:</span>
+            <span id="resRiderName" class="res-val">-</span>
+          </div>
+          <div class="res-row">
+            <span class="res-label">Contact:</span>
+            <span id="resRiderPhone" class="res-val">-</span>
+          </div>
+          <div id="resDetailsRow" class="res-row hidden">
+            <span class="res-label">Details:</span>
+            <span id="resDetailsVal" class="res-val">-</span>
+          </div>
+        </div>
+
+        <label>Customer URL:</label>
+        <div id="generatedUrl" class="link-preview"></div>
+
+        <div class="actions-row">
+          <button class="btn btn-primary" id="copyBtn" onclick="copyGeneratedLink()">
+            Copy Link
+          </button>
+          <a class="btn btn-secondary" id="testLinkBtn" target="_blank" rel="noopener noreferrer">
+            Open Link
+          </a>
+        </div>
+
+        <button class="btn btn-outline" onclick="createNewLink()">
+          + Create Another Link
+        </button>
+      </section>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div>Made by <a href="https://razeclaw.vercel.app" target="_blank" rel="noopener noreferrer" class="creator-link">razeclaw</a></div>
+    <div class="footer-sub">&copy; WL Food Delivery &bull; Internal CSR Portal</div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
